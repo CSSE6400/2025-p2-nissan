@@ -1,7 +1,7 @@
 name: Autograding Tests
-'on':
-- push
-- repository_dispatch
+on:
+  push:
+  repository_dispatch:
 permissions:
   checks: write
   actions: read
@@ -36,7 +36,9 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Correct Health Endpoint
-        setup-command: pip3 install poetry
+        setup-command: |
+          pip3 install poetry
+          poetry install
         command: "./.csse6400/bin/health.sh"
         timeout: 8
         max-score: 25
@@ -45,7 +47,9 @@ jobs:
       uses: classroom-resources/autograding-command-grader@v1
       with:
         test-name: Correct Unit Tests
-        setup-command: pip3 install poetry
+        setup-command: |
+          pip3 install poetry
+          poetry install
         command: "./.csse6400/bin/unittest.sh"
         timeout: 10
         max-score: 25
